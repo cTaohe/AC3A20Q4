@@ -8,7 +8,7 @@ const flash = require('connect-flash')
 // mongoose setting
 const mongoose = require('mongoose')
 const db = mongoose.connection
-mongoose.connect('mongodb://localhost/url', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/url', { useNewUrlParser: true })
 db.on('error', () => {
   console.log('mongoose error')
 })
@@ -26,6 +26,6 @@ app.use(flash())
 // 路由
 app.use('/', require('./routes/home.js'))
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`App is running on ${port}`)
 })
