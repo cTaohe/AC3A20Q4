@@ -1,6 +1,7 @@
 <div class="container text-center w-50">
-  <form action="/" method="post">
-    <input type="text" class="w-100 mb-5" name="shorten" id="shorten" placeholder="請輸入網址">
+  {{> messages}}
+  <form action="/url" method="post">
+    <input type="text" class="w-100 mb-5" name="url" id="url" placeholder="請輸入網址">
     <button class="btn btn-outline-primary w-50">Shorten!</button>
   </form>
 </div>
