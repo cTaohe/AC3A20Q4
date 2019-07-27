@@ -15,9 +15,8 @@ router.post('/url', async (req, res) => {
   const httpCheck = checkInput(url)
   // 從 valids/valid.js 產生新短網址
   const shortNewUrl = await shortUrl()
-  const shortenUrl = `<a href="${req.protocol}://${req.headers.host}/${urls.shorten}">
-  ${req.protocol}://${req.headers.host}/${urls.shorten}
-</a>`
+  const shortenUrl =
+    `${req.protocol}://${req.headers.host}/${shortNewUrl}`
   if (!url) { // req.body 不可以是空的
     errors.push({ message: '必須填寫網址' })
   }
@@ -30,8 +29,8 @@ router.post('/url', async (req, res) => {
         errors.push({
           message: `
             原來網址<a href="${urls.url}">${urls.url}</a>已有產生的短網址
-            <a href="${req.protocol}://${req.headers.host}/${urls.shorten}">
-              ${req.protocol}://${req.headers.host}/${urls.shorten}
+            <a href="${shortenUrl}">
+              ${shortenUrl}
             </a>
             `
         })
@@ -45,7 +44,7 @@ router.post('/url', async (req, res) => {
         // 儲存到資料庫
         newUrl.save(error => {
           if (error) return console.error(error)
-          return res.render('result', { shortNewUrl })
+          return res.render('result', { shortNewUrl , shortenUrl })
         })
       }
     }).catch((err) => { console.log(err) })
