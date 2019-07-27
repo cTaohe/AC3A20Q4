@@ -1,4 +1,4 @@
-const Url = require('./models/url')
+const Url = require('../models/url')
 
 module.exports = {
   shortUrl : async () => {
@@ -13,5 +13,10 @@ module.exports = {
         return randomText
       }
     } while (newUrl)
+  },
+  checkInput : url => {
+    const httpRegex = /^https?:\/\//
+    const handleUrl = (httpRegex.test(url)) ? url : `https://${url}`
+    return handleUrl
   }
 }
