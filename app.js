@@ -8,7 +8,10 @@ const flash = require('connect-flash')
 // mongoose setting
 const mongoose = require('mongoose')
 const db = mongoose.connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/url', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/urlShortener', {
+  useNewUrlParser: true,
+  useCreateIndex: true
+})
 db.on('error', () => {
   console.log('mongoose error')
 })

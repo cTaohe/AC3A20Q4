@@ -15,7 +15,9 @@ router.post('/url', async (req, res) => {
   const httpCheck = checkInput(url)
   // 從 valids/valid.js 產生新短網址
   const shortNewUrl = await shortUrl()
-
+  const shortenUrl = `<a href="${req.protocol}://${req.headers.host}/${urls.shorten}">
+  ${req.protocol}://${req.headers.host}/${urls.shorten}
+</a>`
   if (!url) { // req.body 不可以是空的
     errors.push({ message: '必須填寫網址' })
   }
